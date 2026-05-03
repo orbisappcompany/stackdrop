@@ -27,6 +27,66 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Outfit
 .screen.slide-in-left{animation:slideInLeft 0.32s cubic-bezier(0.22,1,0.36,1) forwards}
 @keyframes slideInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
 
+
+/* ══ CHALLENGE SELECT ══ */
+#challenge-select{overflow-y:auto;padding-bottom:20px}
+#cs-top{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 14px;flex-shrink:0}
+#cs-back{width:34px;height:34px;border-radius:9px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted)}
+#cs-back svg{width:16px;height:16px}
+#cs-title{font-size:17px;font-weight:800;letter-spacing:-0.5px}
+#cs-stars-total{font-size:13px;color:var(--amber);font-weight:700}
+.cs-pack{margin:0 16px 20px}
+.cs-pack-header{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;padding:0 2px}
+.cs-pack-header span{color:var(--periwinkle);margin-left:6px}
+.cs-levels{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.cs-level{aspect-ratio:1;border-radius:12px;background:var(--surface);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;transition:transform 0.12s,border-color 0.12s}
+.cs-level:active{transform:scale(0.93)}
+.cs-level.locked{opacity:0.35;cursor:default}
+.cs-level.unlocked{border-color:var(--border)}
+.cs-level.completed{border-color:var(--sage)}
+.cs-level.completed-3{border-color:var(--amber)}
+.cs-level-num{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--text)}
+.cs-level.locked .cs-level-num{color:var(--muted)}
+.cs-level-stars{font-size:10px;margin-top:2px;letter-spacing:-1px}
+.cs-level-lock{font-size:14px}
+
+/* ══ CHALLENGE GAME OVERLAYS ══ */
+#challenge-hud{display:none;position:absolute;top:0;left:0;right:0;z-index:8;padding:8px 16px;background:linear-gradient(var(--bg),transparent);pointer-events:none}
+#challenge-hud.show{display:flex;align-items:center;justify-content:space-between}
+#ch-level-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-family:'JetBrains Mono',monospace}
+#ch-moves-wrap{display:flex;align-items:center;gap:6px}
+#ch-moves-label{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+#ch-moves-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--amber)}
+#ch-moves-val.low{color:var(--coral);animation:movesLow 0.5s ease-in-out infinite alternate}
+@keyframes movesLow{from{transform:scale(1)}to{transform:scale(1.15)}}
+#ch-goal-bar{position:absolute;top:50px;left:16px;right:16px;z-index:8;pointer-events:none;display:none}
+#ch-goal-bar.show{display:block}
+#ch-goal-text{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-family:'JetBrains Mono',monospace;margin-bottom:4px}
+#ch-goal-progress-wrap{height:4px;background:var(--faint);border-radius:99px;overflow:hidden}
+#ch-goal-progress{height:100%;background:linear-gradient(90deg,var(--sage),var(--teal));border-radius:99px;transition:width 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+
+/* Challenge complete overlay */
+#challenge-complete{gap:0}
+#cc-inner{display:flex;flex-direction:column;align-items:center;width:100%;padding:0 28px}
+#cc-title{font-size:28px;font-weight:900;letter-spacing:-1px;margin-bottom:4px;animation:goEntrance 0.5s cubic-bezier(0.34,1.56,0.64,1) both}
+#cc-level{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:20px;font-family:'JetBrains Mono',monospace}
+#cc-stars-display{font-size:48px;margin-bottom:8px;letter-spacing:4px;animation:starsEntrance 0.6s 0.2s cubic-bezier(0.34,1.56,0.64,1) both}
+@keyframes starsEntrance{from{opacity:0;transform:scale(0.3) rotate(-10deg)}to{opacity:1;transform:scale(1) rotate(0deg)}}
+#cc-star-label{font-size:12px;color:var(--amber);font-weight:700;margin-bottom:20px}
+#cc-stats{display:flex;gap:0;margin-bottom:24px;background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;width:100%}
+#cc-actions{display:flex;flex-direction:column;gap:10px;width:100%}
+#cc-next-btn{background:var(--sage);color:#12141a;border:none;border-radius:13px;padding:16px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;cursor:pointer;width:100%}
+#cc-retry-btn{background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:13px;padding:14px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%}
+#cc-menu-btn{background:transparent;border:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:14px;cursor:pointer;padding:8px}
+
+/* Challenge fail overlay */
+#challenge-fail{gap:0}
+#cf-inner{display:flex;flex-direction:column;align-items:center;width:100%;padding:0 28px}
+#cf-title{font-size:28px;font-weight:900;letter-spacing:-1px;color:var(--coral);margin-bottom:4px}
+#cf-sub{font-size:12px;color:var(--muted);margin-bottom:28px;text-align:center;line-height:1.5}
+#cf-retry-btn{background:var(--periwinkle);color:#12141a;border:none;border-radius:13px;padding:16px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;cursor:pointer;width:100%;margin-bottom:10px}
+#cf-menu-btn{background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:13px;padding:14px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%}
+
 /* ══════════════════════════════════
    HOME SCREEN
 ══════════════════════════════════ */
@@ -105,6 +165,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Outfit
 
 /* Tap hint */
 #tap-hint{position:relative;z-index:2;text-align:center;margin-top:14px;font-size:11px;color:var(--muted);animation:tapHintPulse 2.5s ease-in-out infinite}
+#orbis-brand{position:relative;z-index:2;text-align:center;font-size:9px;color:var(--faint);letter-spacing:1.5px;text-transform:uppercase;margin-top:10px;font-family:'JetBrains Mono',monospace;opacity:0.5}
 @keyframes tapHintPulse{0%,100%{opacity:0.4}50%{opacity:1}}
 #tap-hint-arrow{display:inline-block;animation:arrowBounce 1.2s ease-in-out infinite;margin-right:4px}
 @keyframes arrowBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
@@ -310,17 +371,17 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Outfit
       <div class="mode-card-best">Best <span id="mc-best-blitz">—</span></div>
     </div>
     <div class="mode-card" data-mode="challenge" onclick="startGame('challenge')">
-      <div class="mode-card-badge badge-new">Soon</div>
       <span class="mode-card-icon">🎯</span>
       <div class="mode-card-name">Challenge</div>
-      <div class="mode-card-desc">Pre-filled boards. Limited moves.</div>
-      <div class="mode-card-best" style="color:var(--muted)">Coming soon</div>
+      <div class="mode-card-desc">Pre-filled boards. Clear lines to win.</div>
+      <div class="mode-card-best">100 levels · <span id="mc-ch-progress">0 done</span></div>
     </div>
   </div>
 
   <div id="tap-hint">
     <span id="tap-hint-arrow">↑</span> tap a mode to play
   </div>
+  <div id="orbis-brand">Powered by Orbis App Company</div>
 </div>
 
 <!-- ══ GAME SCREEN ══ -->
@@ -380,6 +441,50 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Outfit
   </div>
   <div id="rotate-btn" onclick="rotateCurrent()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+  </div>
+
+
+  <!-- Challenge HUD -->
+  <div id="challenge-hud">
+    <div id="ch-level-label">Level <span id="ch-level-num">1</span></div>
+    <div id="ch-moves-wrap">
+      <div id="ch-moves-label">moves left</div>
+      <div id="ch-moves-val">—</div>
+    </div>
+  </div>
+  <div id="ch-goal-bar">
+    <div id="ch-goal-text">Goal: clear <span id="ch-goal-target">0</span> lines</div>
+    <div id="ch-goal-progress-wrap"><div id="ch-goal-progress" style="width:0%"></div></div>
+  </div>
+
+  <!-- Challenge Complete overlay -->
+  <div class="overlay" id="challenge-complete">
+    <div id="cc-inner">
+      <div id="cc-title">Cleared! 🎉</div>
+      <div id="cc-level">Level 1</div>
+      <div id="cc-stars-display">⭐⭐⭐</div>
+      <div id="cc-star-label">Perfect!</div>
+      <div id="cc-stats">
+        <div class="go-stat"><div class="go-stat-val" id="cc-moves-used">0</div><div class="go-stat-label">Moves</div></div>
+        <div class="go-stat"><div class="go-stat-val" id="cc-lines-cleared">0</div><div class="go-stat-label">Lines</div></div>
+        <div class="go-stat"><div class="go-stat-val" id="cc-score-val">0</div><div class="go-stat-label">Score</div></div>
+      </div>
+      <div id="cc-actions">
+        <button id="cc-next-btn" onclick="challengeNext()">Next Level →</button>
+        <button id="cc-retry-btn" onclick="challengeRetry()">Play Again</button>
+        <button id="cc-menu-btn" onclick="goChallengeSelect()">← Level Select</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Challenge Fail overlay -->
+  <div class="overlay" id="challenge-fail">
+    <div id="cf-inner">
+      <div id="cf-title">Out of moves</div>
+      <div id="cf-sub">You needed <span id="cf-lines-needed">0</span> more lines.<br>Try a different approach.</div>
+      <button id="cf-retry-btn" onclick="challengeRetry()">Try Again</button>
+      <button id="cf-menu-btn" onclick="goChallengeSelect()">← Level Select</button>
+    </div>
   </div>
 
   <!-- Game Over overlay -->
@@ -447,6 +552,19 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Outfit
   </div>
 </div>
 
+<!-- ══ CHALLENGE SELECT SCREEN ══ -->
+<div class="screen hidden" id="challenge-select">
+  <div id="cs-top">
+    <div id="cs-back" onclick="goHome()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    </div>
+    <div id="cs-title">Challenge</div>
+    <div id="cs-stars-total">⭐ <span id="cs-total-stars">0</span></div>
+  </div>
+  <div id="cs-packs"></div>
+</div>
+
+
 <div id="drag-ghost"><div class="piece-canvas" id="ghost-canvas"></div></div>
 
 <script>
@@ -512,7 +630,9 @@ function showScreen(id,dir='right'){
 function startGame(mode){
   currentMode=mode;
   if(mode==='challenge'){
-    showComingSoon(); return;
+    showScreen('challenge-select','right');
+    renderChallengeSelect();
+    return;
   }
   document.getElementById('game-mode-label').textContent=MODE_NAMES[mode]||mode;
   showScreen('game','right');
@@ -522,6 +642,10 @@ function startGame(mode){
 function goHome(){
   if(blitzInterval){clearInterval(blitzInterval);blitzInterval=null}
   document.getElementById('gameover').classList.remove('show');
+  document.getElementById('challenge-complete').classList.remove('show');
+  document.getElementById('challenge-fail').classList.remove('show');
+  document.getElementById('challenge-hud').classList.remove('show');
+  document.getElementById('ch-goal-bar').classList.remove('show');
   showScreen('home','left');
   updateHomeStats();
   startHomeBg();
@@ -614,6 +738,9 @@ function updateHomeStats(){
   document.getElementById('h-xp-pct').textContent=pct;
   document.getElementById('mc-best-endless').textContent=best||'—';
   document.getElementById('mc-best-blitz').textContent=bestBlitz||'—';
+  const chDone=getCompletedCount();
+  const chEl=document.getElementById('mc-ch-progress');
+  if(chEl) chEl.textContent=chDone+' done';
 
   // Daily reset countdown
   const now=new Date();
@@ -920,6 +1047,20 @@ function handlePlace(idx,r,c){
     addScore(p.shape.flat().filter(Boolean).length);
   }
   renderBoard();
+  if(currentMode==='challenge'){
+    if(cleared>0){
+      const won = onChallengeLineClear(cleared);
+      if(won) return;
+    } else {
+      const lost = onChallengePiecePlace();
+      if(lost) return;
+    }
+    if(pieces.every(pp=>!pp)){
+      undoAvail=true;updateUndoBtn();
+      setTimeout(dealChallengePieces, cleared?350:0);
+    } else { renderPieces(); }
+    return;
+  }
   if(pieces.every(pp=>!pp)){
     undoAvail=true;updateUndoBtn();
     setTimeout(()=>{refillPieces(rng);generateNext(rng)},cleared?350:0);
@@ -1150,6 +1291,731 @@ function renderObStep(){
 }
 function obNext(){obStep++;if(obStep>=obSteps.length){obSkip();return}renderObStep()}
 function obSkip(){document.getElementById('onboarding-overlay').classList.remove('show');localStorage.setItem('sd_ob','1')}
+
+
+// ══════════════════════════════════════════
+// CHALLENGE MODE
+// ══════════════════════════════════════════
+
+// Grid helper: 0=empty, color index 1-8
+const CC = ['#e8b86d','#e07a72','#6dbf8e','#7f8fe8','#c47fb5','#5bbfb5','#e8956d','#a48fe8'];
+function cg(idx){return idx?CC[idx-1]:null}
+
+// Build a 12x12 grid from a compact row description
+// rows: array of strings, each char: '.' empty, '1'-'8' color index
+// missing rows = empty
+function makeGrid(rows){
+  const g=Array.from({length:12},()=>Array(12).fill(null));
+  rows.forEach((row,r)=>{
+    [...row].forEach((ch,c)=>{
+      if(ch!=='.'&&ch>='1'&&ch<='8') g[r][c]=cg(parseInt(ch));
+    });
+  });
+  return g;
+}
+
+// Shape aliases
+const S={
+  I4H:[[1,1,1,1]],
+  I4V:[[1],[1],[1],[1]],
+  I3H:[[1,1,1]],
+  I3V:[[1],[1],[1]],
+  I2H:[[1,1]],
+  I2V:[[1],[1]],
+  S1: [[1]],
+  S22:[[1,1],[1,1]],
+  S33:[[1,1,1],[1,1,1],[1,1,1]],
+  S23:[[1,1,1],[1,1,1]],
+  S32:[[1,1],[1,1],[1,1]],
+  LTR:[[1,0],[1,0],[1,1]], // L top-right
+  LTL:[[0,1],[0,1],[1,1]], // L top-left
+  LBR:[[1,1],[1,0],[1,0]], // L bottom-right
+  LBL:[[1,1],[0,1],[0,1]], // L bottom-left
+  TH: [[1,1,1],[0,1,0]],
+  TV: [[1,0],[1,1],[1,0]],
+  SZ: [[0,1,1],[1,1,0]],
+  SS: [[1,1,0],[0,1,1]],
+  CR: [[1,1],[1,0]],
+};
+
+// ── HAND-CRAFTED LEVELS 1-20 ──────────────────────────────
+// Each level: {id, name, goal(lines to clear), moveLimit, grid, pieces:[{shape,color}], starMoves:[3star,2star]}
+const HAND_LEVELS = [
+  // PACK 1: TUTORIAL (1-5) — very easy, one clear per level
+  {
+    id:1, name:'First Clear', goal:1, moveLimit:3,
+    grid: makeGrid([
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '111111111111', // bottom row filled with color 1 (amber) — but 3 cells missing
+    ].map((r,i)=>i===11?'111111111...':r)),
+    pieces:[
+      {shape:S.I3H, color:CC[0]},
+      {shape:S.S1,  color:CC[2]},
+      {shape:S.S1,  color:CC[2]},
+    ],
+    starMoves:[1,2,3]
+  },
+  {
+    id:2, name:'Column Up', goal:1, moveLimit:3,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>r<9?'1...........':'............')
+    ),
+    pieces:[
+      {shape:S.I3V, color:CC[0]},
+      {shape:S.S1,  color:CC[3]},
+      {shape:S.S1,  color:CC[3]},
+    ],
+    starMoves:[1,2,3]
+  },
+  {
+    id:3, name:'Double Row', goal:2, moveLimit:4,
+    grid: makeGrid([
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '111111111...', // row 10 missing 3
+      '222222222...', // row 11 missing 3
+    ]),
+    pieces:[
+      {shape:S.I3V, color:CC[0]},
+      {shape:S.I3V, color:CC[1]},
+      {shape:S.S1,  color:CC[2]},
+    ],
+    starMoves:[2,3,4]
+  },
+  {
+    id:4, name:'The Corner', goal:2, moveLimit:4,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r===11) return '111111111...';
+        if(r>=9)   return '1...........';
+        return            '............';
+      })
+    ),
+    pieces:[
+      {shape:S.I3H, color:CC[0]},
+      {shape:S.I3V, color:CC[1]},
+      {shape:S.S1,  color:CC[2]},
+    ],
+    starMoves:[2,3,4]
+  },
+  {
+    id:5, name:'Square Fill', goal:2, moveLimit:5,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r===11) return '1111111111..';
+        if(r===10) return '1111111111..';
+        return            '............';
+      })
+    ),
+    pieces:[
+      {shape:S.I2V, color:CC[0]},
+      {shape:S.I2V, color:CC[1]},
+      {shape:S.S22, color:CC[2]},
+    ],
+    starMoves:[2,3,5]
+  },
+
+  // PACK 2: EASY (6-10)
+  {
+    id:6, name:'Triple Threat', goal:3, moveLimit:5,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r===9)  return '111111111...';
+        if(r===10) return '222222222...';
+        if(r===11) return '333333333...';
+        return            '............';
+      })
+    ),
+    pieces:[
+      {shape:S.I3V, color:CC[0]},
+      {shape:S.I3V, color:CC[1]},
+      {shape:S.I3V, color:CC[2]},
+    ],
+    starMoves:[3,4,5]
+  },
+  {
+    id:7, name:'L-Shape', goal:2, moveLimit:5,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r===11) return '11111111....';
+        if(r>=8&&r<=10) return '1...........';
+        return '............';
+      })
+    ),
+    pieces:[
+      {shape:S.LTR, color:CC[3]},
+      {shape:S.I4H, color:CC[0]},
+      {shape:S.S1,  color:CC[1]},
+    ],
+    starMoves:[2,3,5]
+  },
+  {
+    id:8, name:'Row & Column', goal:2, moveLimit:5,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        const base = r===11?'111111111...':'............';
+        const arr = base.split('');
+        if(r<11) arr[0]='1';
+        return arr.join('');
+      })
+    ),
+    pieces:[
+      {shape:S.I3H, color:CC[0]},
+      {shape:S.I3V, color:CC[1]},
+      {shape:S.S1,  color:CC[2]},
+    ],
+    starMoves:[2,3,5]
+  },
+  {
+    id:9, name:'Zigzag', goal:3, moveLimit:6,
+    grid: makeGrid([
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '............',
+      '1...........', // col 0 rows 6-11
+      '11..........', // col 0-1 rows 7-11
+      '111111111...', // row 8 missing 3
+      '111111111...', // row 9 missing 3
+      '111111111...', // row 10 missing 3
+      '111111111...', // row 11 missing 3
+    ]),
+    pieces:[
+      {shape:S.S33, color:CC[2]},
+      {shape:S.S1,  color:CC[0]},
+      {shape:S.S1,  color:CC[1]},
+    ],
+    starMoves:[2,4,6]
+  },
+  {
+    id:10, name:'Block Party', goal:4, moveLimit:6,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r>=8) return '111111111...';
+        return          '............';
+      })
+    ),
+    pieces:[
+      {shape:S.S23, color:CC[0]},
+      {shape:S.I2H, color:CC[1]},
+      {shape:S.S1,  color:CC[2]},
+    ],
+    starMoves:[3,4,6]
+  },
+
+  // PACK 3: MEDIUM (11-15)
+  {
+    id:11, name:'Cross Cut', goal:4, moveLimit:7,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        const arr = Array(12).fill('.');
+        if(r>=8) for(let c=0;c<9;c++) arr[c]='1';
+        arr[0]='1'; arr[1]='1'; // two extra col cells
+        return arr.join('');
+      })
+    ),
+    pieces:[
+      {shape:S.I3H, color:CC[3]},
+      {shape:S.I3V, color:CC[4]},
+      {shape:S.S22, color:CC[0]},
+    ],
+    starMoves:[4,5,7]
+  },
+  {
+    id:12, name:'The Frame', goal:4, moveLimit:7,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r===8||r===11) return '111111111111';
+        if(r>8&&r<11) return '1..........1';
+        return '............';
+      })
+    ),
+    pieces:[
+      {shape:S.I4H, color:CC[0]},
+      {shape:S.I3V, color:CC[1]},
+      {shape:S.I2H, color:CC[2]},
+    ],
+    starMoves:[4,5,7]
+  },
+  {
+    id:13, name:'Cascade Setup', goal:5, moveLimit:7,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r===11) return '111111111111';
+        if(r===10) return '111111111...';
+        if(r===9)  return '111111......';
+        if(r===8)  return '111.........';
+        return            '............';
+      })
+    ),
+    pieces:[
+      {shape:S.I3H, color:CC[1]},
+      {shape:S.I3V, color:CC[2]},
+      {shape:S.S22, color:CC[3]},
+    ],
+    starMoves:[3,5,7]
+  },
+  {
+    id:14, name:'Twin Columns', goal:4, moveLimit:7,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        const arr=Array(12).fill('.');
+        if(r>=4){arr[0]='1';arr[11]='1';}
+        if(r===11) for(let c=0;c<12;c++) arr[c]='1';
+        if(r===10) for(let c=0;c<12;c++) arr[c]='2';
+        return arr.join('');
+      })
+    ),
+    pieces:[
+      {shape:S.I4V, color:CC[0]},
+      {shape:S.I4V, color:CC[1]},
+      {shape:S.I2H, color:CC[2]},
+    ],
+    starMoves:[4,5,7]
+  },
+  {
+    id:15, name:'Scattered', goal:5, moveLimit:8,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r===11) return '111111111111';
+        if(r===10) return '11111111....';
+        if(r===9)  return '1111........';
+        if(r===8)  return '11..........';
+        if(r===7)  return '1...........';
+        return            '............';
+      })
+    ),
+    pieces:[
+      {shape:S.LTR, color:CC[0]},
+      {shape:S.I4H, color:CC[1]},
+      {shape:S.S22, color:CC[2]},
+    ],
+    starMoves:[4,6,8]
+  },
+
+  // PACK 4: HARD (16-20)
+  {
+    id:16, name:'Full House', goal:6, moveLimit:8,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r>=6) return '111111111...';
+        return          '............';
+      })
+    ),
+    pieces:[
+      {shape:S.S23, color:CC[0]},
+      {shape:S.S32, color:CC[1]},
+      {shape:S.S1,  color:CC[2]},
+    ],
+    starMoves:[5,6,8]
+  },
+  {
+    id:17, name:'The Maze', goal:6, moveLimit:9,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        const arr=Array(12).fill('.');
+        if(r%2===0&&r>=4) for(let c=0;c<10;c++) arr[c]='1';
+        if(r%2===1&&r>=5) for(let c=2;c<12;c++) arr[c]='2';
+        return arr.join('');
+      })
+    ),
+    pieces:[
+      {shape:S.I4H, color:CC[3]},
+      {shape:S.I4H, color:CC[4]},
+      {shape:S.I2H, color:CC[0]},
+    ],
+    starMoves:[5,7,9]
+  },
+  {
+    id:18, name:'Domino Effect', goal:7, moveLimit:9,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r>=5) return '111111111111';
+        return          '............';
+      })
+    ),
+    pieces:[
+      {shape:S.S33, color:CC[0]},
+      {shape:S.S23, color:CC[1]},
+      {shape:S.I3H, color:CC[2]},
+    ],
+    starMoves:[6,7,9]
+  },
+  {
+    id:19, name:'Checkerboard', goal:6, moveLimit:10,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r<6) return '............';
+        return Array.from({length:12},(_,c)=>(r+c)%2===0?'1':'.').join('');
+      })
+    ),
+    pieces:[
+      {shape:S.S22, color:CC[0]},
+      {shape:S.S22, color:CC[1]},
+      {shape:S.S22, color:CC[2]},
+    ],
+    starMoves:[6,8,10]
+  },
+  {
+    id:20, name:'Grand Finale', goal:8, moveLimit:10,
+    grid: makeGrid(
+      Array.from({length:12},(_,r)=>{
+        if(r<4) return '............';
+        if(r===11) return '111111111111';
+        return Array.from({length:12},(_,c)=>((r+c)%3!==0)?'1':'.').join('');
+      })
+    ),
+    pieces:[
+      {shape:S.S33, color:CC[0]},
+      {shape:S.I4H, color:CC[1]},
+      {shape:S.S22, color:CC[2]},
+    ],
+    starMoves:[7,8,10]
+  },
+];
+
+// ── LEVEL GENERATOR (levels 21-100) ──────────────────────
+function generateLevel(id){
+  const difficulty = Math.min(1, (id-20)/80); // 0..1
+  const goalLines = Math.floor(2 + difficulty*8);
+  const moveLimit = goalLines + Math.floor(2 + difficulty*4);
+  const seed = id*7919;
+  const rng = mulberry32(seed);
+
+  // Generate grid: fill bottom rows partially
+  const g = Array.from({length:12},()=>Array(12).fill(null));
+  const filledRows = Math.floor(3 + difficulty*7);
+  const startRow = 12 - filledRows;
+  for(let r=startRow;r<12;r++){
+    const gaps = Math.floor(1 + (1-difficulty)*4);
+    const gapPositions = new Set();
+    while(gapPositions.size < gaps){
+      gapPositions.add(Math.floor(rng()*12));
+    }
+    for(let c=0;c<12;c++){
+      if(!gapPositions.has(c)){
+        g[r][c] = CC[Math.floor(rng()*CC.length)];
+      }
+    }
+  }
+
+  // Generate 3 pieces that can fill the gaps
+  const pieceOptions = [S.I4H,S.I4V,S.I3H,S.I3V,S.I2H,S.I2V,S.S22,S.S1,S.LTR,S.LBR,S.TH,S.SZ];
+  const pieces = Array.from({length:3},()=>({
+    shape: pieceOptions[Math.floor(rng()*pieceOptions.length)],
+    color: CC[Math.floor(rng()*CC.length)]
+  }));
+
+  return {
+    id, name:`Level ${id}`,
+    goal: goalLines, moveLimit,
+    grid: g, pieces,
+    starMoves:[Math.floor(moveLimit*0.5), Math.floor(moveLimit*0.75), moveLimit],
+    generated:true
+  };
+}
+
+function getLevel(id){
+  if(id<=20) return HAND_LEVELS[id-1];
+  if(id<=100) return generateLevel(id);
+  return null;
+}
+
+// ── CHALLENGE STATE ───────────────────────────────────────
+let challengeLevel = null;
+let challengeMovesLeft = 0;
+let challengeLinesCleared = 0;
+let challengeMovesUsed = 0;
+let challengeProgress = JSON.parse(localStorage.getItem('sd_ch_progress')||'{}');
+// Format: {levelId: starsEarned}
+
+function saveChallengeProgress(levelId, stars){
+  const prev = challengeProgress[levelId]||0;
+  if(stars > prev){
+    challengeProgress[levelId] = stars;
+    localStorage.setItem('sd_ch_progress', JSON.stringify(challengeProgress));
+  }
+}
+
+function isLevelUnlocked(id){
+  if(id===1) return true;
+  return !!challengeProgress[id-1]; // previous level completed
+}
+
+function getTotalStars(){
+  return Object.values(challengeProgress).reduce((a,b)=>a+b,0);
+}
+
+function getCompletedCount(){
+  return Object.keys(challengeProgress).length;
+}
+
+// ── CHALLENGE SELECT SCREEN ───────────────────────────────
+function goChallengeSelect(){
+  document.getElementById('challenge-complete').classList.remove('show');
+  document.getElementById('challenge-fail').classList.remove('show');
+  // If already on challenge-select, just re-render
+  if(currentScreen==='challenge-select'){
+    renderChallengeSelect(); return;
+  }
+  showScreen('challenge-select', currentScreen==='home'?'right':'left');
+  renderChallengeSelect();
+}
+
+function renderChallengeSelect(){
+  document.getElementById('cs-total-stars').textContent = getTotalStars();
+  const container = document.getElementById('cs-packs');
+  container.innerHTML='';
+
+  const packs=[
+    {name:'Tutorial', range:[1,5], color:'var(--sage)'},
+    {name:'Easy',     range:[6,10], color:'var(--periwinkle)'},
+    {name:'Medium',   range:[11,15], color:'var(--amber)'},
+    {name:'Hard',     range:[16,20], color:'var(--coral)'},
+    {name:'Expert',   range:[21,40], color:'var(--dusty)'},
+    {name:'Master',   range:[41,70], color:'var(--teal)'},
+    {name:'Legend',   range:[71,100], color:'var(--peach)'},
+  ];
+
+  packs.forEach(pack=>{
+    const [from, to] = pack.range;
+    const div = document.createElement('div');
+    div.className='cs-pack';
+
+    // Count stars in this pack
+    let packStars=0, packMax=0;
+    for(let i=from;i<=to;i++){
+      packMax+=3;
+      packStars+=(challengeProgress[i]||0);
+    }
+
+    div.innerHTML=`<div class="cs-pack-header">${pack.name} <span style="color:${pack.color}">★${packStars}/${packMax}</span></div><div class="cs-levels" id="pack-levels-${from}"></div>`;
+    container.appendChild(div);
+
+    const grid = div.querySelector(`#pack-levels-${from}`);
+    for(let id=from;id<=to;id++){
+      const unlocked = isLevelUnlocked(id);
+      const stars = challengeProgress[id]||0;
+      const completed = stars>0;
+      const cell = document.createElement('div');
+      cell.className='cs-level '+(unlocked?(completed?(stars===3?'completed-3':'completed'):'unlocked'):'locked');
+
+      let starsHtml='';
+      if(completed){
+        starsHtml='<div class="cs-level-stars">'+'⭐'.repeat(stars)+'☆'.repeat(3-stars)+'</div>';
+      }
+
+      cell.innerHTML=`<div class="cs-level-num">${id}</div>${completed?starsHtml:''}${!unlocked?'<div class="cs-level-lock">🔒</div>':''}`;
+
+      if(unlocked){
+        cell.onclick=()=>startChallengeLevel(id);
+      }
+      grid.appendChild(cell);
+    }
+  });
+}
+
+// ── START A CHALLENGE LEVEL ───────────────────────────────
+function startChallengeLevel(id){
+  challengeLevel = getLevel(id);
+  if(!challengeLevel) return;
+
+  currentMode = 'challenge';
+  challengeLinesCleared = 0;
+  challengeMovesUsed = 0;
+  challengeMovesLeft = challengeLevel.moveLimit;
+
+  // Reset challenge pieces — fixed set, cycle through tray
+  // We'll put them in a queue and deal 3 at a time
+  challengePieceQueue = [...challengeLevel.pieces];
+  challengePieceIndex = 0;
+
+  showScreen('game','right');
+
+  // Setup game state
+  isGameOver=false;score=0;sessionLines=0;sessionMoves=0;sessionBestCombo=0;
+  hotStreak=0;hotStreakActive=false;undoAvail=true;updateUndoBtn();
+  prevGrid=[];prevPieces=[];
+  document.getElementById('score-val').textContent='0';
+  document.getElementById('gameover').classList.remove('show');
+  document.getElementById('challenge-complete').classList.remove('show');
+  document.getElementById('challenge-fail').classList.remove('show');
+  document.getElementById('danger-ring').classList.remove('show');
+  document.getElementById('streak-indicator').classList.remove('show');
+  document.getElementById('multiplier').style.display='none';
+  document.getElementById('blitz-timer').style.display='none';
+  document.getElementById('game-mode-label').textContent='Level '+id;
+
+  // Load the pre-built grid
+  grid = challengeLevel.grid.map(r=>[...r]);
+  buildBoard();renderBoard();
+
+  // Deal challenge pieces
+  dealChallengePieces();
+
+  // Show HUD
+  document.getElementById('challenge-hud').classList.add('show');
+  document.getElementById('ch-level-num').textContent=id;
+  updateChallengeHUD();
+  showChallengeGoalBar();
+
+  document.getElementById('best-val').textContent='goal: '+challengeLevel.goal+' lines';
+  document.getElementById('streak-val').textContent=streak;
+  document.getElementById('level-val').textContent=level;
+  document.getElementById('xp-bar').style.width=(xp/(level*100)*100)+'%';
+}
+
+let challengePieceQueue=[];
+let challengePieceIndex=0;
+
+function dealChallengePieces(){
+  // Deal next 3 from queue (cycle if needed)
+  for(let i=0;i<3;i++){
+    if(challengePieceIndex < challengePieceQueue.length){
+      pieces[i] = {...challengePieceQueue[challengePieceIndex++]};
+    } else {
+      // Queue exhausted — generate random pieces
+      pieces[i] = randPiece();
+    }
+  }
+  // Next preview — peek ahead
+  nextPieces=[null,null,null];
+  for(let i=0;i<3;i++){
+    if(challengePieceIndex+i < challengePieceQueue.length){
+      nextPieces[i]={...challengePieceQueue[challengePieceIndex+i]};
+    } else {
+      nextPieces[i]=randPiece();
+    }
+  }
+  renderPieces();renderNextPieces();
+}
+
+function updateChallengeHUD(){
+  if(currentMode!=='challenge') return;
+  const movEl=document.getElementById('ch-moves-val');
+  movEl.textContent=challengeMovesLeft;
+  movEl.classList.toggle('low', challengeMovesLeft<=2);
+  updateChallengeGoalBar();
+}
+
+function showChallengeGoalBar(){
+  const bar=document.getElementById('ch-goal-bar');
+  bar.classList.add('show');
+  document.getElementById('ch-goal-target').textContent=challengeLevel.goal;
+  updateChallengeGoalBar();
+}
+
+function updateChallengeGoalBar(){
+  const pct=Math.min(100,(challengeLinesCleared/challengeLevel.goal)*100);
+  document.getElementById('ch-goal-progress').style.width=pct+'%';
+}
+
+// ── CHALLENGE INTERCEPT handlePlace ──────────────────────
+// We hook into the existing handlePlace via a wrapper
+
+function onChallengeLineClear(linesCleared){
+  challengeLinesCleared += linesCleared;
+  challengeMovesLeft--;
+  challengeMovesUsed++;
+  updateChallengeHUD();
+  // Check win
+  if(challengeLinesCleared >= challengeLevel.goal){
+    setTimeout(showChallengeComplete, 500);
+    return true; // won
+  }
+  // Check lose — no moves left
+  if(challengeMovesLeft<=0){
+    setTimeout(showChallengeFail, 400);
+    return true;
+  }
+  return false;
+}
+
+function onChallengePiecePlace(){
+  // Only decrement moves if no line was cleared (line clear handles it)
+  // Actually we decrement per placement attempt
+  challengeMovesLeft--;
+  challengeMovesUsed++;
+  updateChallengeHUD();
+  if(challengeMovesLeft<=0 && challengeLinesCleared < challengeLevel.goal){
+    setTimeout(showChallengeFail, 400);
+    return true;
+  }
+  return false;
+}
+
+function calcStars(movesUsed, level){
+  const [s3,s2] = level.starMoves;
+  if(movesUsed<=s3) return 3;
+  if(movesUsed<=s2) return 2;
+  return 1;
+}
+
+function showChallengeComplete(){
+  const stars = calcStars(challengeMovesUsed, challengeLevel);
+  saveChallengeProgress(challengeLevel.id, stars);
+  const starStr = '⭐'.repeat(stars)+'☆'.repeat(3-stars);
+  const labels = ['','Good job!','Well done!','Perfect!'];
+  document.getElementById('cc-title').textContent = stars===3?'Perfect! 🎉':'Level Clear!';
+  document.getElementById('cc-level').textContent = 'Level '+challengeLevel.id;
+  document.getElementById('cc-stars-display').textContent = starStr;
+  document.getElementById('cc-star-label').textContent = labels[stars];
+  document.getElementById('cc-moves-used').textContent = challengeMovesUsed;
+  document.getElementById('cc-lines-cleared').textContent = challengeLinesCleared;
+  document.getElementById('cc-score-val').textContent = score;
+  // Hide next button if last level
+  const nextBtn=document.getElementById('cc-next-btn');
+  nextBtn.style.display = challengeLevel.id<100?'block':'none';
+  sfxPerfect(); haptic([20,10,20,10,40]);
+  document.getElementById('challenge-complete').classList.add('show');
+  // Hide HUD
+  document.getElementById('challenge-hud').classList.remove('show');
+  document.getElementById('ch-goal-bar').classList.remove('show');
+}
+
+function showChallengeFail(){
+  const needed = challengeLevel.goal - challengeLinesCleared;
+  document.getElementById('cf-lines-needed').textContent = needed;
+  sfxGameOver(); haptic([50,30,80]);
+  document.getElementById('challenge-fail').classList.add('show');
+  document.getElementById('challenge-hud').classList.remove('show');
+  document.getElementById('ch-goal-bar').classList.remove('show');
+}
+
+function challengeNext(){
+  document.getElementById('challenge-complete').classList.remove('show');
+  const nextId = challengeLevel.id+1;
+  if(nextId<=100) startChallengeLevel(nextId);
+  else goChallengeSelect();
+}
+
+function challengeRetry(){
+  document.getElementById('challenge-complete').classList.remove('show');
+  document.getElementById('challenge-fail').classList.remove('show');
+  startChallengeLevel(challengeLevel.id);
+}
+
+// ── PATCH goHome to hide challenge UI ────────────────────
 
 // ══════════════════════════════════════════
 // DAILY STREAK
